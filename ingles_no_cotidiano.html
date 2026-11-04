@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inglês no Cotidiano</title>
+<style>
+:root {
+  --site-primary: #183B56;
+  --site-on-primary: #FFFFFF;
+  --site-secondary: #E7B65C;
+  --site-on-secondary: #172B3A;
+  --site-background: #F3F6F8;
+  --site-on-background: #172B3A;
+  --site-font-body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --site-font-heading: Inter, ui-sans-serif, system-ui, sans-serif;
+  --site-heading-scale: 1;
+  --site-spacing-scale: 1;
+  --site-radius-scale: 1;
+  --site-decoration-opacity: 1;
+  color-scheme: light dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: var(--site-font-body); background: var(--site-background); color: var(--site-on-background); }
+#app { min-height: 100vh; width: 100%; background-color: light-dark(#F3F6F8,#101820); color: light-dark(#172B3A,#EDF3F7); }
+.hero { background: var(--site-primary); color: var(--site-on-primary); padding: calc(30px * var(--site-spacing-scale)) max(22px, calc((100vw - 1120px)/2)); position: relative; overflow: hidden; }
+.hero:after { content:"Aa"; position:absolute; right:8%; top:-35px; font-size:210px; font-weight:900; color:rgba(255,255,255,.055); pointer-events:none; }
+.hero-inner { max-width:1120px; margin:auto; position:relative; z-index:1; }
+.eyebrow { text-transform:uppercase; letter-spacing:.14em; font-size:11px; font-weight:800; color:#F3C66F; }
+h1 { font-family:var(--site-font-heading); font-size:calc(36px * var(--site-heading-scale)); line-height:1.08; margin:10px 0; letter-spacing:-.04em; }
+.hero p { color:#D8E5EC; max-width:650px; line-height:1.55; margin:0; }
+.stats { display:flex; gap:10px; flex-wrap:wrap; margin-top:22px; }
+.stat { background:rgba(255,255,255,.11); border:1px solid rgba(255,255,255,.15); border-radius:14px; padding:10px 14px; min-width:100px; }
+.stat b { display:block; font-size:20px; color:#F5C66E; }
+.stat span { font-size:11px; color:#E2EDF2; }
+main { max-width:1120px; margin:auto; padding:22px; }
+.toolbar { display:grid; grid-template-columns:1fr auto; gap:12px; margin-bottom:18px; }
+.search { width:100%; border:1px solid light-dark(#D7E0E6,#354552); background:light-dark(#FFFFFF,#1B2933); color:inherit; padding:14px 16px; border-radius:14px; font:inherit; outline:none; }
+.search:focus { border-color:var(--site-secondary); box-shadow:0 0 0 3px rgba(231,182,92,.18); }
+.tabs { display:flex; gap:8px; overflow-x:auto; padding:2px 1px 12px; scrollbar-width:thin; }
+.tab { white-space:nowrap; border:1px solid light-dark(#D8E1E7,#394955); background:light-dark(#FFFFFF,#1B2933); color:inherit; border-radius:999px; padding:9px 13px; font:600 12px var(--site-font-body); cursor:pointer; }
+.tab.active { background:var(--site-primary); border-color:var(--site-primary); color:white; }
+.section-head { display:flex; align-items:end; justify-content:space-between; gap:12px; margin:12px 0 14px; }
+.section-head h2 { font-size:calc(21px * var(--site-heading-scale)); margin:0; letter-spacing:-.025em; }
+.section-head small { color:light-dark(#657783,#A6B5BF); }
+.grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
+.word { border:1px solid light-dark(#E0E7EB,#34434E); background:light-dark(#FFFFFF,#1B2933); border-radius:calc(18px * var(--site-radius-scale)); padding:14px; min-height:176px; display:flex; flex-direction:column; position:relative; transition:transform .16s,border-color .16s; }
+.word:hover { transform:translateY(-2px); border-color:var(--site-secondary); }
+.illustration { height:67px; display:grid; place-items:center; border-radius:13px; background:light-dark(#F1F5F7,#243541); font-size:42px; margin-bottom:10px; }
+.pt { font-weight:750; font-size:15px; }
+.en { color:light-dark(#496476,#B9D0DC); font-size:14px; margin-top:3px; }
+.pron { color:light-dark(#85939B,#9EADB6); font-size:11px; margin-top:4px; }
+.card-actions { display:flex; gap:6px; margin-top:auto; padding-top:10px; }
+.mini { border:0; background:light-dark(#EDF2F5,#2A3B47); color:inherit; border-radius:9px; padding:7px 9px; font-size:11px; cursor:pointer; }
+.mini:hover { background:var(--site-secondary); color:#172B3A; }
+button { font-family:inherit; }
+.panel { border:1px solid light-dark(#DCE5EA,#34434E); background:light-dark(#FFFFFF,#1B2933); border-radius:20px; padding:20px; margin:22px 0; }
+.panel h2 { margin:0 0 5px; font-size:21px; }
+.muted { color:light-dark(#657783,#A6B5BF); font-size:13px; }
+.study-layout { display:grid; grid-template-columns:1.1fr .9fr; gap:18px; align-items:center; }
+.study-card { min-height:235px; border-radius:18px; background:linear-gradient(135deg,#183B56,#285B78); color:white; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:20px; cursor:pointer; }
+.study-card .big-emoji { font-size:58px; }
+.study-card .big-word { font-size:28px; font-weight:800; margin:8px 0; }
+.study-card .hint { color:#D8E5EC; font-size:12px; }
+.study-controls { display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+.primary-btn,.secondary-btn { border:0; border-radius:12px; padding:11px 15px; font-weight:750; cursor:pointer; }
+.primary-btn { background:var(--site-secondary); color:#172B3A; }
+.secondary-btn { background:light-dark(#EAF0F3,#2A3B47); color:inherit; }
+.quiz-question { font-size:22px; font-weight:800; margin:14px 0; }
+.answers { display:grid; grid-template-columns:repeat(2,1fr); gap:9px; }
+.answer { padding:13px; border:1px solid light-dark(#DCE5EA,#40515D); border-radius:12px; background:light-dark(#F8FAFB,#22323D); color:inherit; cursor:pointer; text-align:left; }
+.answer.correct { border-color:#2F9B69; background:rgba(47,155,105,.13); }
+.answer.wrong { border-color:#D66B5C; background:rgba(214,107,92,.13); }
+.feedback { min-height:22px; font-size:13px; font-weight:700; margin-top:12px; }
+.progress { height:8px; background:light-dark(#E8EEF1,#354651); border-radius:99px; overflow:hidden; margin-top:12px; }
+.progress > div { height:100%; background:var(--site-secondary); width:0; transition:width .2s; }
+.empty { grid-column:1/-1; text-align:center; padding:35px; color:light-dark(#657783,#A6B5BF); }
+footer { text-align:center; color:light-dark(#758590,#9EADB6); font-size:11px; padding:15px 20px 28px; }
+@media(max-width:850px){.grid{grid-template-columns:repeat(3,minmax(0,1fr));}.study-layout{grid-template-columns:1fr;}}
+@media(max-width:600px){h1{font-size:30px}.toolbar{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}main{padding:16px}.word{padding:11px;min-height:169px}.illustration{height:60px;font-size:38px}.hero{padding:25px 20px}.answers{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div id="app">
+<header class="hero"><div class="hero-inner">
+<div class="eyebrow">Aprenda inglês com o que já faz parte da sua vida</div>
+<h1>Inglês no<br>cotidiano.</h1>
+<p>Veja, ouça, associe e pratique. Um vocabulário visual para aprender palavras úteis em casa, no trabalho, na rua e com a família.</p>
+<div class="stats"><div class="stat"><b id="totalWords">0</b><span>palavras e expressões</span></div><div class="stat"><b id="learnedCount">0</b><span>marcadas como aprendidas</span></div><div class="stat"><b>3</b><span>formas de praticar</span></div></div>
+</div></header>
+<main>
+<div class="toolbar"><input id="search" class="search" placeholder="🔎  Buscar: porta, caminhar, daughter..." aria-label="Buscar vocabulário"><button class="secondary-btn" id="randomBtn">🎲 Palavra aleatória</button></div>
+<nav class="tabs" id="tabs"></nav>
+<div class="section-head"><div><h2 id="categoryTitle">Todas as palavras</h2><small id="resultCount"></small></div><small>Toque no alto-falante para ouvir</small></div>
+<section class="grid" id="wordGrid"></section>
+<section class="panel" id="studyPanel"><div class="section-head"><div><h2>🧠 Estude com cartões</h2><div class="muted">Tente lembrar antes de revelar a tradução.</div></div><small id="studyPosition">Cartão 1</small></div>
+<div class="study-layout"><div><div class="study-card" id="flashcard" role="button" tabindex="0" aria-label="Revelar cartão"><div class="big-emoji" id="studyEmoji">🚪</div><div class="big-word" id="studyWord">Door</div><div class="hint" id="studyHint">Qual é a tradução em português?</div></div><div class="study-controls"><button class="secondary-btn" id="prevCard">← Anterior</button><button class="primary-btn" id="revealCard">Revelar tradução</button><button class="secondary-btn" id="nextCard">Próxima →</button><button class="secondary-btn" id="markLearned">✓ Já aprendi</button></div></div>
+<div><h3 style="margin:0 0 8px">Dica de aprendizagem</h3><p class="muted" style="line-height:1.7">Olhe para a ilustração e diga a palavra em inglês em voz alta. Depois, crie uma frase curta: <b>“I open the door.”</b> (Eu abro a porta.) Repetir em situações reais ajuda a fixar.</p><div class="progress"><div id="learnedBar"></div></div><div class="muted" id="learnedText" style="margin-top:8px">0% do vocabulário marcado como aprendido</div></div></div></section>
+<section class="panel" id="quizPanel"><div class="section-head"><div><h2>⚡ Desafio rápido</h2><div class="muted">Escolha a tradução correta. As perguntas mudam a cada rodada.</div></div><small id="quizScore">Pontos: 0</small></div><div class="muted" id="quizPrompt">Como se diz em inglês?</div><div class="quiz-question" id="quizWord">Caminhar</div><div class="answers" id="quizAnswers"></div><div class="feedback" id="quizFeedback" aria-live="polite"></div><div class="study-controls"><button class="primary-btn" id="nextQuestion">Próxima pergunta →</button><button class="secondary-btn" id="resetQuiz">Reiniciar pontuação</button></div></section>
+</main><footer>Inglês no Cotidiano · Aprenda um pouco todos os dias · A pronúncia usa a voz disponível no seu dispositivo.</footer>
+</div>
+<script>
+const groups = [
+{name:'Ações do dia a dia',icon:'🏃',words:[['Caminhar','To walk','🚶','uók'],['Correr','To run','🏃','rân'],['Trabalhar','To work','💼','uârk'],['Treinar','To train','🏋️','trein'],['Estudar','To study','📚','stâdi'],['Ler','To read','📖','ríd'],['Escrever','To write','✍️','ráit'],['Falar','To speak','🗣️','spík'],['Conversar','To talk','💬','tók'],['Comer','To eat','🍽️','ít'],['Beber','To drink','🥤','drínk'],['Dormir','To sleep','😴','slíp'],['Acordar','To wake up','⏰','uêik âp'],['Levantar','To get up','🛏️','guét âp'],['Sentar','To sit','🪑','sít'],['Levantar-se','To stand up','🧍','sténd âp'],['Dirigir','To drive','🚗','dráiv'],['Esperar','To wait','⏳','uêit'],['Observar','To observe','👀','âbzârv'],['Pensar','To think','🤔','thínk'],['Aprender','To learn','🧠','lârn'],['Ensinar','To teach','👨‍🏫','títch'],['Comprar','To buy','🛍️','bái'],['Vender','To sell','💰','sél'],['Abrir','To open','🔓','ôupen'],['Fechar','To close','🔒','klôuz'],['Entrar','To enter','🚪','énter'],['Sair','To leave','🚶‍♂️','lív'],['Limpar','To clean','🧹','klín'],['Cozinhar','To cook','🍳','kúk']]},
+{name:'Objetos ao redor',icon:'🏠',words:[['Porta','Door','🚪','dór'],['Janela','Window','🪟','uíndou'],['Relógio de parede','Clock','🕒','klók'],['Mesa','Table','🪵','têibol'],['Cadeira','Chair','🪑','tchér'],['Sofá','Sofa','🛋️','sôufa'],['Cama','Bed','🛏️','béd'],['Espelho','Mirror','🪞','míror'],['Chave','Key','🔑','kí'],['Celular','Cell phone','📱','sél fôun'],['Computador','Computer','💻','kâmpiúter'],['Televisão','Television / TV','📺','télevíjan'],['Copo','Glass','🥛','gléss'],['Garrafa','Bottle','🍼','bótol'],['Prato','Plate','🍽️','plêit'],['Colher','Spoon','🥄','spún'],['Garfo','Fork','🍴',' fórk'],['Faca','Knife','🔪','náif'],['Mochila','Backpack','🎒','békpék'],['Carteira','Wallet','👛','uólet'],['Óculos','Glasses','👓','gléssiz'],['Lâmpada','Light bulb','💡','láit bâlb'],['Ventilador','Fan','🪭','fén'],['Toalha','Towel','🧻','táuel'],['Banheiro','Bathroom','🚿','béthrum']]},
+{name:'Roupas',icon:'👕',words:[['Camiseta','T-shirt','👕','tí shârt'],['Camisa','Shirt','👔','shârt'],['Calça','Pants / Trousers','👖','pénts'],['Calça jeans','Jeans','👖','djínz'],['Bermuda','Shorts','🩳','shórts'],['Sapato','Shoe','👞','shú'],['Tênis','Sneakers','👟','sníkers'],['Meia','Sock','🧦','sók'],['Cueca','Underwear','🩲','ânderuér'],['Jaqueta','Jacket','🧥','djéket'],['Casaco','Coat','🧥','kôut'],['Cinto','Belt','🧷','bélt'],['Boné','Cap','🧢','kép'],['Relógio de pulso','Wristwatch','⌚','ríst uótch'],['Uniforme','Uniform','🥋','iú nifórm'],['Gravata','Tie','👔','tái']]},
+{name:'Família e pessoas',icon:'👨‍👩‍👧',words:[['Filha','Daughter','👧','dóter'],['Filho','Son','👦','sân'],['Esposa','Wife','👩','uáif'],['Marido','Husband','👨','hâzbând'],['Pai','Father','👨‍🍼','fáther'],['Mãe','Mother','👩‍🍼','mâther'],['Homem','Man','👨','mén'],['Mulher','Woman','👩','úman'],['Menino','Boy','🧒','bói'],['Menina','Girl','👧','gârl'],['Criança','Child','🧒','tcháild'],['Bebê','Baby','👶','bêibi'],['Família','Family','👨‍👩‍👧','fémili'],['Irmão','Brother','👬','brâther'],['Irmã','Sister','👭','síst er'],['Avô','Grandfather','👴','gréndfáther'],['Avó','Grandmother','👵','gréndmâther'],['Amigo','Friend','🤝','frénd'],['Colega de trabalho','Coworker','🧑‍💼','kôu uârker'],['Vizinho','Neighbor','🏘️','nêibor'],['Pessoa','Person','🧍','pârson'],['Senhor','Sir / Gentleman','🎩','sâr'],['Senhora','Lady / Ma’am','👒','lêidi'],['Chefe','Boss','🧑‍💼','bóss'],['Servidor público','Civil servant','🏛️','sívol sârvent']]},
+{name:'Alimentos e bebidas',icon:'🍎',words:[['Água','Water','💧','uóter'],['Suco','Juice','🧃','djús'],['Café','Coffee','☕','kófi'],['Leite','Milk','🥛','mîlk'],['Pão','Bread','🍞','bréd'],['Arroz','Rice','🍚','ráis'],['Feijão','Beans','🫘','bínz'],['Carne','Meat','🥩','mít'],['Frango','Chicken','🍗','tchíken'],['Peixe','Fish','🐟','físh'],['Ovo','Egg','🥚','ég'],['Queijo','Cheese','🧀','tchíz'],['Maçã','Apple','🍎','épol'],['Banana','Banana','🍌','banéna'],['Laranja','Orange','🍊','órindj'],['Fruta','Fruit','🍇','frút'],['Verduras / legumes','Vegetables','🥦','védjtâbolz'],['Salada','Salad','🥗','sélad'],['Açúcar','Sugar','🍬','shúgar'],['Sal','Salt','🧂','sólt'],['Almoço','Lunch','🍛','lântch'],['Jantar','Dinner','🍽️','díner'],['Café da manhã','Breakfast','🥐','brékfast'],['Lanche','Snack','🥪','snék']]},
+{name:'Transporte',icon:'🚗',words:[['Carro','Car','🚗','kár'],['Moto','Motorcycle','🏍️','môuter saikol'],['Bicicleta','Bicycle / Bike','🚲','báissikol'],['Caminhão','Truck','🚚','trâk'],['Ônibus','Bus','🚌','bâs'],['Avião','Airplane','✈️','érplein'],['Helicóptero','Helicopter','🚁','hélicópter'],['Trem','Train','🚆','trein'],['Estrada','Road','🛣️','rôud'],['Rua','Street','🛤️','strít'],['Avenida','Avenue','🏙️','éveniu'],['Gasolina','Gasoline / Petrol','⛽','gésolín'],['Posto de gasolina','Gas station','⛽','gés stêichan'],['Pneu','Tire','🛞','táier'],['Motor','Engine','⚙️','éndjin'],['Volante','Steering wheel','🛞','stíring uíl'],['Freio','Brake','🛑','breik'],['Capacete','Helmet','🪖','hélmet'],['Trânsito','Traffic','🚦','tréfik'],['Estacionamento','Parking lot','🅿️','párking lót']]},
+{name:'Natureza e ambiente',icon:'🌳',words:[['Céu','Sky','🌤️','skái'],['Sol','Sun','☀️','sân'],['Lua','Moon','🌙','mún'],['Estrela','Star','⭐','stár'],['Nuvem','Cloud','☁️','kláud'],['Chuva','Rain','🌧️','rêin'],['Vento','Wind','💨','uínd'],['Árvore','Tree','🌳','trí'],['Flor','Flower','🌸','fláuer'],['Grama','Grass','🌱','gráss'],['Terra','Earth / Soil','🌎','ârth'],['Água','Water','💧','uóter'],['Rio','River','🏞️','r íver'],['Montanha','Mountain','⛰️','máunten'],['Floresta','Forest','🌲','fórest'],['Animal','Animal','🐾','énimal'],['Pássaro','Bird','🐦','bârd'],['Águia','Eagle','🦅','ígol'],['Cachorro','Dog','🐕','dóg'],['Gato','Cat','🐈','két']]},
+{name:'Academia e exercícios',icon:'🏋️',words:[['Academia','Gym','🏋️','djím'],['Exercício','Exercise','🤸','éksersáiz'],['Treinamento','Training','🏃','trêining'],['Músculo','Muscle','💪','mâssol'],['Braço','Arm','💪','árm'],['Perna','Leg','🦵','lég'],['Panturrilha','Calf','🦵','kéf'],['Peito','Chest','🫁','tchést'],['Costas','Back','🧍','bék'],['Ombro','Shoulder','🏋️','shôulder'],['Abdômen','Abdomen','🧍','ébdomen'],['Peso','Weight','⚖️','uêit'],['Halter','Dumbbell','🏋️','dâm-bél'],['Barra','Barbell','🏋️','bárbél'],['Alongar','To stretch','🧘','strétch'],['Flexão','Push-up','💪','púsh âp'],['Agachamento','Squat','🦵','skuót'],['Força','Strength','💥','stréngth'],['Resistência','Endurance','🏃','endiúrans']]},
+{name:'Trabalho e segurança',icon:'🛡️',words:[['Trabalho','Work','💼','uârk'],['Empresa','Company','🏢','kâmpani'],['Funcionário','Employee','🧑‍💼','emplóií'],['Supervisor','Supervisor','🧑‍✈️','súpervaizer'],['Segurança','Security','🛡️','sikiúriti'],['Vigilante','Security guard','👮','sikiúriti gárd'],['Câmera','Camera','📹','kémera'],['Monitoramento','Monitoring','🖥️','mónitoring'],['Portaria','Gatehouse / Reception','🏢','gêitháus'],['Entrada','Entrance','➡️','éntrans'],['Saída','Exit','🚪','égzit'],['Visitante','Visitor','🧑','vízitor'],['Identificação','Identification','🪪','aidêntifikêichan'],['Crachá','ID badge','🪪','ái dí bédj'],['Rádio','Radio','📻','rêidiôu'],['Comunicação','Communication','📡','komiunikêichan'],['Ocorrência','Incident','⚠️','ínsident'],['Relatório','Report','📄','ripórt'],['Equipamento','Equipment','🧰','ikuípment'],['Equipe','Team','👥','tím'],['Reunião','Meeting','🤝','míting'],['Horário','Schedule','🗓️','ské djul'],['Responsabilidade','Responsibility','📋','risponsabíliti']]},
+{name:'Tempo e rotina',icon:'🕒',words:[['Hoje','Today','📅','tudêi'],['Amanhã','Tomorrow','🌅','tumórou'],['Ontem','Yesterday','🌇','iésterdei'],['Manhã','Morning','🌄','mórning'],['Tarde','Afternoon','🌤️','áfternún'],['Noite','Night','🌙','náit'],['Madrugada','Early morning','🌌','ârli mórning'],['Agora','Now','⏱️','náu'],['Depois','Later','➡️','lêiter'],['Antes','Before','⬅️','bifór'],['Sempre','Always','♾️','ólueiz'],['Nunca','Never','🚫','néver'],['Às vezes','Sometimes','🔁','sâmtaimz'],['Cedo','Early','🌅','ârli'],['Atrasado','Late','⌛','lêit'],['Dia','Day','☀️','dêi'],['Semana','Week','🗓️','uíik'],['Mês','Month','📆','mânth'],['Ano','Year','🎉','yír'],['Minuto','Minute','⏰','mínit'],['Hora','Hour','🕒','áuer']]}
+];
+const all = groups.flatMap((g,gi)=>g.words.map((w,wi)=>({pt:w[0],en:w[1],emoji:w[2],pron:w[3],category:g.name,id:gi+'-'+wi})));
+const learned = new Set(); let active='Todas'; let deckIndex=0; let revealed=false; let quizCurrent=null; let score=0; let answered=false;
+const $=id=>document.getElementById(id);
+$('totalWords').textContent=all.length;
+function speak(word){ if(!('speechSynthesis' in window)){alert('A leitura em voz alta não está disponível neste navegador.');return;} speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(word);u.lang='en-US';u.rate=.82;speechSynthesis.speak(u); }
+function renderTabs(){ $('tabs').innerHTML=''; [['Todas','✨'],...groups.map(g=>[g.name,g.icon])].forEach(([name,icon])=>{const b=document.createElement('button');b.className='tab'+(active===name?' active':'');b.textContent=icon+' '+name;b.onclick=()=>{active=name;renderTabs();renderWords();};$('tabs').appendChild(b);}); }
+function renderWords(){const q=$('search').value.trim().toLowerCase();const list=all.filter(w=>(active==='Todas'||w.category===active)&&(!q||(w.pt+' '+w.en+' '+w.category).toLowerCase().includes(q)));$('categoryTitle').textContent=active==='Todas'?'Todas as palavras':active;$('resultCount').textContent=list.length+' itens';$('wordGrid').innerHTML='';if(!list.length){$('wordGrid').innerHTML='<div class="empty">Nenhuma palavra encontrada. Tente outra busca.</div>';return;}list.forEach(w=>{const el=document.createElement('article');el.className='word';el.innerHTML=`<div class="illustration" aria-hidden="true">${w.emoji}</div><div class="pt">${w.pt}</div><div class="en">${w.en}</div><div class="pron">Pronúncia aproximada: ${w.pron}</div><div class="card-actions"><button class="mini" data-say="">🔊 Ouvir</button><button class="mini" data-learn="">${learned.has(w.id)?'✓ Aprendida':'+ Aprendi'}</button></div>`;el.querySelector('[data-say]').onclick=()=>speak(w.en.replace(' / ', ' '));el.querySelector('[data-learn]').onclick=()=>toggleLearn(w);$('wordGrid').appendChild(el);});}
+function toggleLearn(w){learned.has(w.id)?learned.delete(w.id):learned.add(w.id);updateProgress();renderWords();}
+function updateProgress(){ $('learnedCount').textContent=learned.size;$('learnedBar').style.width=(learned.size/all.length*100)+'%';$('learnedText').textContent=Math.round(learned.size/all.length*100)+'% do vocabulário marcado como aprendido'; }
+function deck(){return active==='Todas'?all:all.filter(w=>w.category===active)}
+function renderDeck(){const list=deck();if(deckIndex>=list.length)deckIndex=0;const w=list[deckIndex];if(!w)return;$('studyEmoji').textContent=w.emoji;$('studyWord').textContent=revealed?w.pt:w.en;$('studyHint').textContent=revealed?`${w.en} · ${w.pron}`:'Qual é a tradução em português?';$('studyPosition').textContent=`Cartão ${deckIndex+1} de ${list.length}`;$('revealCard').textContent=revealed?'Mostrar inglês':'Revelar tradução';$('markLearned').textContent=learned.has(w.id)?'✓ Aprendida':'✓ Já aprendi';}
+function moveDeck(d){const n=deck().length;deckIndex=(deckIndex+d+n)%n;revealed=false;renderDeck();}
+$('flashcard').onclick=()=>{revealed=!revealed;renderDeck();};$('flashcard').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();revealed=!revealed;renderDeck();}};$('revealCard').onclick=()=>{revealed=!revealed;renderDeck();};$('prevCard').onclick=()=>moveDeck(-1);$('nextCard').onclick=()=>moveDeck(1);$('markLearned').onclick=()=>{const w=deck()[deckIndex];if(w&&!learned.has(w.id))learned.add(w.id);updateProgress();renderDeck();renderWords();};
+function newQuestion(){const pool=all;quizCurrent=pool[Math.floor(Math.random()*pool.length)];answered=false;$('quizWord').textContent=quizCurrent.pt;$('quizPrompt').textContent='Como se diz em inglês?';$('quizFeedback').textContent='';const wrong=[];while(wrong.length<3){const x=pool[Math.floor(Math.random()*pool.length)];if(x.id!==quizCurrent.id&&!wrong.some(a=>a.id===x.id))wrong.push(x);}const opts=[quizCurrent,...wrong].sort(()=>Math.random()-.5);$('quizAnswers').innerHTML='';opts.forEach(w=>{const b=document.createElement('button');b.className='answer';b.textContent=w.en;b.onclick=()=>{if(answered)return;answered=true;if(w.id===quizCurrent.id){score++;$('quizFeedback').textContent='Muito bem! Resposta correta. 🎉';$('quizFeedback').style.color='#2F9B69';}else{$('quizFeedback').textContent='Quase! A resposta certa é '+quizCurrent.en+'.';$('quizFeedback').style.color='#D88748';} $('quizScore').textContent='Pontos: '+score;[...$('quizAnswers').children].forEach(btn=>{if(btn.textContent===quizCurrent.en)btn.classList.add('correct');else if(btn===b)btn.classList.add('wrong');});};$('quizAnswers').appendChild(b);});}
+$('nextQuestion').onclick=newQuestion;$('resetQuiz').onclick=()=>{score=0;$('quizScore').textContent='Pontos: 0';newQuestion();};$('search').addEventListener('input',renderWords);$('randomBtn').onclick=()=>{const w=all[Math.floor(Math.random()*all.length)];active=w.category;renderTabs();renderWords();deckIndex=deck().findIndex(x=>x.id===w.id);revealed=false;renderDeck();$('studyPanel').scrollIntoView({behavior:'smooth',block:'center'});};
+renderTabs();renderWords();renderDeck();updateProgress();newQuestion();
+</script>
+</body></html>
